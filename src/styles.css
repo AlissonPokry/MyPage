@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ===== Design Tokens (Tailwind v4 @theme) ===== */
+@theme {
+  /* Core palette (prompt.md mandatory) */
+  --color-jet-black: #252525;
+  --color-deep-black: #0D0D0D;
+  --color-electric-blue: #00F0FF;
+  --color-off-white: #F2F0EF;
+
+  /* Extended palette */
+  --color-blue-glow: rgba(0, 240, 255, 0.15);
+  --color-blue-dim: rgba(0, 240, 255, 0.4);
+  --color-blue-subtle: rgba(0, 240, 255, 0.08);
+  --color-glass-bg: rgba(37, 37, 37, 0.6);
+  --color-glass-border: rgba(0, 240, 255, 0.12);
+
+  /* Typography */
+  --font-display: 'Exo 2', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'JetBrains Mono', monospace;
+}
+
+/* ===== Global Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-jet-black);
+  color: var(--color-off-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::selection {
+  background-color: var(--color-electric-blue);
+  color: var(--color-deep-black);
+}
+
+/* ===== Glassmorphism Utility ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 14px;
+}
+
+.glass-glow {
+  /* Subtle base shadow */
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.02);
+}
+
+.glass-glow:hover {
+  border-color: var(--color-electric-blue);
+  background: rgba(0, 240, 255, 0.07);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.22), 
+              0 0 48px rgba(0, 240, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+/* ===== Scroll Animate ===== */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-animate {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-deep-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-electric-blue);
+}
